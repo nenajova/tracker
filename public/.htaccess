@@ -1,0 +1,11 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Ako fajl ili folder postoji, posluži direktno
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Sve ostalo ide na index.php
+    RewriteRule ^ index.php [L]
+</IfModule>
