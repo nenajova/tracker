@@ -12,6 +12,19 @@
 </style>
 
 <div class="wrapper">
-    <h1>Tracker! ✅</h1>
+    <h1>Time Tracker ✅</h1>
+
+    {% if app.user %}
+        <p>Welcome {{ app.user.userIdentifier }}! You are logged in.</p>
+        <p>Here you can manage your tasks, set deadlines, and track your progress. Stay organized and productive with Tracker!</p>
+        <p>You are logged in as {{ app.user.userIdentifier }}, <a href="{{ logout_path() }}">Logout</a></p>
+    {% else %}
+        <p>Welcome! Please <a href="{{ path('app_login') }}">log in</a> to access your tracker.</p>
+        <p>Tracker is a simple time tracking application that helps you stay organized and productive. 
+        <a href="{{ path('app_register') }}">Sign up</a> or <a href="{{ path('app_login') }}">log in</a> to start tracking your tasks and deadlines.</p>
+    {% endif %}
+
+    {# {{ dump(app.user) }} #}
+
 </div>
 {% endblock %}

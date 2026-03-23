@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}What to Track{% endblock %}
+
+{% block body %}
+
+<h1>What to track</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Add to tracker</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for what in whats %}
+            <tr>
+                <td>{{ what.name }}</td>
+                <td><a href="{{ path('app_what_add', {'whatId': what.id}) }}">Add</a></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
