@@ -23,4 +23,21 @@
     </tbody>
 </table>
 
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Remove from tracker</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for what in whatsTrack %}
+            <tr>
+                <td>{{ what.getWhat().getName() }}</td>
+                <td><a href="{{ path('app_what_remove', {'whatId': what.getWhat().getId()}) }}">Remove</a></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
 {% endblock %}

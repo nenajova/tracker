@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\What;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -14,6 +15,25 @@ class WhatRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, What::class);
+    }
+
+    public function findNotAssignedToUser(User $user): array
+    {
+        // return $this->createQueryBuilder('w')
+        //     ->leftJoin('w.whatUsers', 'wu', 'WITH', 'wu.user = :user')
+        //     ->where('wu.id IS NULL')
+        //     ->setParameter('user', $user)
+        //     ->getQuery()
+        //     ->getResult();
+        return $this->createQueryBuilder('w')
+            ->where('w.id NOT IN (
+                SELECT IDENTITY(wu.what)
+                FROM App\Entity\WhatUser wu
+                WHERE wu.user = :user
+            )')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getResult();
     }
 
     //    /**

@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TrackController!{% endblock %}
+
+{% block body %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for tracker in trackers %}
+            <tr>
+                <td>{{ tracker.getWhat().getName() }}</td>
+                <td>{{ tracker.getTime()|date('H:i:s d.m.Y') }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

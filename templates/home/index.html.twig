@@ -18,6 +18,11 @@
         <p>Welcome {{ app.user.userIdentifier }}! You are logged in.</p>
         <p>Here you can manage your tasks, set deadlines, and track your progress. Stay organized and productive with Tracker!</p>
         <p>You are logged in as {{ app.user.userIdentifier }}, <a href="{{ logout_path() }}">Logout</a></p>
+
+        {% for what in whatsTrack %}
+            <p><a href="{{ path('app_track_add', {'whatId': what.getWhat().getId()}) }}">{{ what.getWhat().getName() }}</a></p>
+        {% endfor %}
+
     {% else %}
         <p>Welcome! Please <a href="{{ path('app_login') }}">log in</a> to access your tracker.</p>
         <p>Tracker is a simple time tracking application that helps you stay organized and productive. 
